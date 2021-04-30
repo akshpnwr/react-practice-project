@@ -1,16 +1,25 @@
 import { Fragment, useState } from 'react';
 import User from '../../components/User/User';
+import Overlay from '../../components/Overlay/Overlay';
+
+let overlay = null;
 
 const Form = (props) => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   // const [submitted, setSubmitted] = useState(false);
   const [inputs, setInput] = useState([]);
-
-  let submitted = false;
+  const [loadOverlay, setLoadOverlay] = useState(false);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
+    if (!(name || age)) {
+      console.log('overlay');
+      overlay = <Overlay />;
+
+      setLoadOverlay(true);
+    }
 
     const newInputs = inputs;
 
@@ -50,9 +59,10 @@ const Form = (props) => {
           onChange={(e) => ageChangeHandler(e)}
         />
         <br />
-        <input onClick={(e) => onSubmitHandler(e)} type="submit" />
+        <input onClick={onSubmitHandler} type="submit" />
       </form>
       {displayUser}
+      {overlay}
     </Fragment>
   );
 };
