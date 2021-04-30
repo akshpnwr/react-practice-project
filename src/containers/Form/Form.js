@@ -14,11 +14,16 @@ const Form = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (!(name || age)) {
+    console.log(Boolean(name), Boolean(age));
+
+    console.log(!(name && age));
+    if (!(name && age)) {
       console.log('overlay');
-      overlay = <Overlay />;
+      overlay = <Overlay loadOverlay={setLoadOverlay} />;
 
       setLoadOverlay(true);
+
+      return;
     }
 
     const newInputs = inputs;
@@ -62,7 +67,7 @@ const Form = (props) => {
         <input onClick={onSubmitHandler} type="submit" />
       </form>
       {displayUser}
-      {overlay}
+      {loadOverlay ? overlay : null}
     </Fragment>
   );
 };

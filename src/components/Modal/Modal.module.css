@@ -1,0 +1,20 @@
+.Modal {
+  background-color: white;
+  color: rgb(27, 27, 27);
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20%;
+}
+
+.Button {
+  outline: none;
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  align-self: flex-end;
+  cursor: pointer;
+}
