@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import User from '../../components/User/User';
 import Overlay from '../../components/Overlay/Overlay';
+import ReactDOM from 'react-dom';
 
 let overlay = null;
 
@@ -14,9 +15,6 @@ const Form = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    console.log(Boolean(name), Boolean(age));
-
-    console.log(!(name && age));
     if (!(name && age)) {
       console.log('overlay');
       overlay = <Overlay loadOverlay={setLoadOverlay} />;
@@ -67,7 +65,12 @@ const Form = (props) => {
         <input onClick={onSubmitHandler} type="submit" />
       </form>
       {displayUser}
-      {loadOverlay ? overlay : null}
+      {loadOverlay
+        ? ReactDOM.createPortal(
+            overlay,
+            document.getElementById('overlay-section')
+          )
+        : null}
     </Fragment>
   );
 };
