@@ -33,6 +33,8 @@ const Form = (props) => {
 
     newInputs.push({ enteredName, enteredAge });
     setInput([...newInputs]);
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
 
   // const nameChangeHandler = (e) => {
