@@ -1,6 +1,5 @@
 import classes from './Overlay.module.css';
 import Modal from '../Modal/Modal';
-import { useState } from 'react';
 
 const Overlay = (props) => {
   //   const [hidden, setHidden] = useState(false);

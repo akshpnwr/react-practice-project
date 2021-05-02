@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import User from '../../components/User/User';
 import Overlay from '../../components/Overlay/Overlay';
 import ReactDOM from 'react-dom';
@@ -6,8 +6,11 @@ import ReactDOM from 'react-dom';
 let overlay = null;
 
 const Form = (props) => {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
+  // const [name, setName] = useState('');
+  // const [age, setAge] = useState('');
   // const [submitted, setSubmitted] = useState(false);
   const [inputs, setInput] = useState([]);
   const [loadOverlay, setLoadOverlay] = useState(false);
@@ -15,8 +18,10 @@ const Form = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (!(name && age)) {
-      console.log('overlay');
+    const enteredName = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
+
+    if (!(enteredName && enteredAge)) {
       overlay = <Overlay loadOverlay={setLoadOverlay} />;
 
       setLoadOverlay(true);
@@ -26,17 +31,16 @@ const Form = (props) => {
 
     const newInputs = inputs;
 
-    newInputs.push({ name, age });
-
+    newInputs.push({ enteredName, enteredAge });
     setInput([...newInputs]);
   };
 
-  const nameChangeHandler = (e) => {
-    setName(e.target.value);
-  };
-  const ageChangeHandler = (e) => {
-    setAge(e.target.value);
-  };
+  // const nameChangeHandler = (e) => {
+  //   setName(e.target.value);
+  // };
+  // const ageChangeHandler = (e) => {
+  //   setAge(e.target.value);
+  // };
 
   let displayUser = null;
 
@@ -51,7 +55,9 @@ const Form = (props) => {
         <input
           type="text"
           placeholder="Name"
-          onChange={(e) => nameChangeHandler(e)}
+          ref={nameInputRef}
+          // value={name}
+          // onChange={(e) => nameChangeHandler(e)}
         />
         <br />
 
@@ -59,7 +65,9 @@ const Form = (props) => {
         <input
           type="text"
           placeholder="Age"
-          onChange={(e) => ageChangeHandler(e)}
+          ref={ageInputRef}
+          // value={age}
+          // onChange={(e) => ageChangeHandler(e)}
         />
         <br />
         <input onClick={onSubmitHandler} type="submit" />

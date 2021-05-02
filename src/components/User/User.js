@@ -4,8 +4,8 @@ const user = (props) => {
   const users = props.inputs.map((input, i) => {
     return (
       <Fragment key={i}>
-        <h3>{input.name}</h3>
-        <p>{+input.age < 1 ? 'Age should be > 0' : input.age}</p>
+        <h3>{input.enteredName}</h3>
+        <p>{+input.enteredAge < 1 ? 'Age should be > 0' : input.enteredAge}</p>
       </Fragment>
     );
   });
